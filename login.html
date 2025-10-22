@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login 💕 Graduation Gallery 💕</title>
+  <link rel="icon" href="Assets/favicon_io/favicon.ico">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0b132b, #000);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(162, 144, 255, 0.5);
+      text-align: center;
+      width: 300px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px #a290ff;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    input::placeholder {
+      color: #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 10px;
+      background: #a290ff;
+      color: #000;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #8167e5;
+    }
+
+    .error {
+      color: #ff6b6b;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login 💕 Graduation Gallery 💕</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <div class="error" id="errorMsg"></div>
+  </div>
+
+  <script>
+    // Username dan password statis
+    const USERNAME = "miskacantik";
+    const PASSWORD = "190924";
+
+    function login() {
+      const usernameInput = document.getElementById("username").value;
+      const passwordInput = document.getElementById("password").value;
+      const errorMsg = document.getElementById("errorMsg");
+
+      if(usernameInput === USERNAME && passwordInput === PASSWORD){
+        localStorage.setItem("isLoggedIn", "true");
+        // redirect ke halaman utama
+        window.location.href = "index.html";
+      } else {
+        errorMsg.textContent = "Username atau password salah!";
+      }
+    }
+  </script>
+</body>
+</html>

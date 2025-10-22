@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>❤️ Graduation Gallery ❤️</title>
+    <link rel="icon" href="Assets/favicon_io/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Graduation Of</h1>
+      <h1>💕 Miska Wahyu Mithata Ika Setata 💕</h1>
+
+      <div class="carousel">
+        <!-- Baris Pertama -->
+        <div class="carousel-row" id="row1">
+          <div class="track">
+            <div class="photocard"><img src="Assets/1.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/2.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/3.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/4.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/5.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/6.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/7.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/8.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/9.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/10.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/11.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/12.JPG" /><div class="caption"></div></div>
+          </div>
+        </div>
+
+        <!-- Baris Kedua -->
+        <div class="carousel-row" id="row2">
+          <div class="track">
+            <div class="photocard"><img src="Assets/1.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/2.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/3.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/4.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/5.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/6.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/7.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/8.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/9.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/10.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/11.JPG" /><div class="caption"></div></div>
+            <div class="photocard"><img src="Assets/12.JPG" /><div class="caption"></div></div>
+          </div>
+        </div>
+      </div>
+      <Footer>
+        <p>Made with 💕 by <strong>Asan & Miska</strong></p>
+        <p>© 2025 Forever Together</p>
+      </Footer>
+      <!-- Tombol Music -->
+      <div class="musicBtn" id="musicBtn">
+        <i id="musicIcon">🎵</i>
+      </div>
+
+      <audio id="bgMusic" loop>
+        <source src="Assets/music.mp3" type="audio/mp3" />
+      </audio>
+    </div>
+
+    <script>
+      // Cek apakah user sudah login
+      if(localStorage.getItem("isLoggedIn") !== "true"){
+        // jika belum login, redirect ke halaman login
+        window.location.href = "login.html";
+      }else{
+        // ===== AUTOPLAY MUSIC =====
+        const music = document.getElementById("bgMusic");
+        music.play().catch(() => {
+          console.log("Autoplay blocked, user interaksi dibutuhkan");
+        });
+      }
+
+      // ===== LOGOUT OTOMATIS SAAT TAB DITUTUP =====
+      window.addEventListener("beforeunload", () => {
+        localStorage.removeItem("isLoggedIn");
+      });
+
+      // ===== CAROUSEL SUPER MULUS TANPA GAP =====
+      function makeInfiniteCarousel(rowId, speed, reverse = false) {
+        const row = document.getElementById(rowId);
+        const track = row.querySelector(".track");
+        const clone = track.cloneNode(true);
+        row.appendChild(clone);
+
+        const totalWidth = track.scrollWidth + 20; // jarak antar card
+        clone.style.left = reverse ? `-${totalWidth}px` : `${totalWidth}px`;
+
+        let x = 0;
+        function animate() {
+          x += reverse ? speed : -speed;
+          if (!reverse && x <= -totalWidth) x = 0;
+          if (reverse && x >= totalWidth) x = 0;
+
+          track.style.transform = `translateX(${x}px)`;
+          clone.style.transform = `translateX(${x}px)`;
+          requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+      }
+
+      makeInfiniteCarousel("row1", 0.4); // ke kiri
+      makeInfiniteCarousel("row2", 0.4, true); // ke kanan
+
+      // ===== MUSIC BUTTON =====
+      const musicBtn = document.getElementById("musicBtn");
+      const music = document.getElementById("bgMusic");
+      let isPlaying = false;
+
+      musicBtn.addEventListener("click", () => {
+        if (isPlaying) {
+          music.play();
+          musicBtn.style.background = "rgba(46, 204, 113,0.6)";
+        } else {
+          music.pause();
+          musicBtn.style.background = "rgba(255,255,255,0.1)";
+        }
+        isPlaying = !isPlaying;
+      });
+    </script>
+  </body>
+</html>
